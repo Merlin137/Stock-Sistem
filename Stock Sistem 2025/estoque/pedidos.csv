@@ -1,0 +1,3 @@
+Codigo_Pedido,ID_Produto,Produto,Quantidade,Solicitante,Departamento,DataPedido,Status
+PED000001,2,ANEL DE TENSÃO CAPSULAR - ANEL ENDOCAPSULAR,5,pedro,ti,05/03/2025,Pendente
+PED000002,1,ANEL DE MALYUGIN 6.25MM,5,pedro,esdfg,05/03/2025,Pendente

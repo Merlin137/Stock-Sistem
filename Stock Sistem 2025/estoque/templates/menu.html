@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Sistema de Estoque</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background: url("data:image/png;base64,{{ imagem_fundo }}") no-repeat center/cover;
+            background-color: #f4f7fa;
+            background-attachment: fixed; /* Faz o fundo ficar fixo */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu-container {
+            background: rgba(0, 0, 0, 0.411);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        .menu-options {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        a, form button {
+            display: block;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: none;
+        }
+        a:hover, form button:hover {
+            background: #2980b9;
+        }
+        .message {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .error {
+            background: #ffebee;
+            color: #c62828;
+        }
+        footer {
+            margin-top: 30px;
+            color: #ffffff; /* Ajustado para consistência */
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Menu Principal</h1>
+        <div class="menu-options">
+            <a href="{{ url_for('entrada') }}">Entrada de Produtos</a>
+            <a href="{{ url_for('saida') }}">Saída de Produtos</a>
+            <a href="{{ url_for('pedidos') }}">Pedidos</a>
+            <a href="{{ url_for('consulta') }}">Consulta de Produtos</a>
+            <a href="{{ url_for('devolucao') }}">Cadastrar Devolução</a>
+            <a href="{{ url_for('relatorio_saidas') }}">Relatório de Saídas</a>
+            <form method="POST" action="{{ url_for('logout') }}">
+                <button type="submit">Sair</button>
+            </form>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <footer>© CEROF 2025 Stock System</footer>
+    </div>
+</body>
+</html>
