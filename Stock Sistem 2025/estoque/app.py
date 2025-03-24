@@ -9,16 +9,12 @@ import os
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = 'chave_secreta_123'
 
-# Lista de usuários (simulando um banco de dados simples)
 usuarios_cadastrados = [
     {'nome': 'Farmacia', 'senha': 'Farmacia@2025'},
     {'nome': 'Admin', 'senha': 'cerof@2025'},
     {'nome': 'Almox', 'senha': 'Almox@2025'},
     {'nome': 'Estagiario', 'senha': 'Kronos-10'}
 ]
-    # Adicione mais usuários aqui se desejar, ex: {'nome': 'Admin', 'senha': 'Admin@123'}
-
-# Funções Auxiliares
 def carregar_imagem_fundo():
     try:
         caminho = os.path.join('static', 'fundo.png')
@@ -98,7 +94,6 @@ def gerar_codigo_pedido():
     pedidos_df = carregar_pedidos()
     return f"PED{len(pedidos_df) + 1:06d}"
 
-# Decoradores e Context Processors
 @app.context_processor
 def inject_imagem_fundo():
     imagem_fundo = carregar_imagem_fundo()
@@ -118,7 +113,6 @@ def login_required(f):
 def login():
     print(f"[INFO] Acessando a rota de login - Método: {request.method}")
     
-    # Verifica se o usuário já está logado
     if 'logado' in session and session['logado']:
         print(f"[INFO] Usuário {session.get('usuario', 'desconhecido')} já logado, redirecionando para o menu")
         return redirect(url_for('menu'))
@@ -129,12 +123,10 @@ def login():
         
         print(f"[INFO] Tentativa de login - Usuário: {usuario}")
         
-        # Validação básica
         if not usuario or not senha:
             flash('❌ Preencha todos os campos.', 'error')
             return render_template('login.html')
         
-        # Verifica se as credenciais correspondem a algum usuário na lista
         usuario_encontrado = next((u for u in usuarios_cadastrados if u['nome'] == usuario and u['senha'] == senha), None)
         
         if usuario_encontrado:
